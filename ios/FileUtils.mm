@@ -103,5 +103,42 @@
     resolve(returnDict);
 }
 
++ (MatWrapper*)getMatFromImage:(NSString*)inPath resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject {
+    
+    // Check input parameters validity
+    if (inPath == nil || inPath == (NSString*)NSNull.null || [inPath isEqualToString:@""]) {
+        return reject(@"EINVAL", [NSString stringWithFormat:@"EINVAL: invalid parameter, param '%@'", inPath], nil);
+    }
+    // make sure input exists and is not a directory and output not a dir
+    if (![[NSFileManager defaultManager] fileExistsAtPath: inPath]) {
+        return reject(@"ENOENT", [NSString stringWithFormat:@"ENOENT: no such file, open '%@'", inPath], nil);
+    }
+    BOOL isDir = NO;
+    if([[NSFileManager defaultManager] fileExistsAtPath:inPath isDirectory:&isDir] && isDir) {
+        return reject(@"EISDIR", [NSString stringWithFormat:@"EISDIR: illegal operation on a directory, open '%@'", inPath], nil);
+    }
+    
+    UIImage *sourceImage = [UIImage imageWithContentsOfFile:inPath];
+    
+    if (sourceImage == nil) {
+        return reject(@"ENOENT", [NSString stringWithFormat:@"ENOENT: no such file, open '%@'", inPath], nil);
+    }
+    
+    UIImage *normalizedImage = [FileUtils normalizeImage:sourceImage];
+    
+    Mat outputMat;
+    UIImageToMat(normalizedImage, outputMat);
+    int matIndex = [MatManager.sharedMgr addMat:outputMat];
+    
+    NSNumber *wid = [NSNumber numberWithInt:(int)sourceImage.size.width];
+    NSNumber *hei = [NSNumber numberWithInt:(int)sourceImage.size.height];
+    NSNumber *matI = [NSNumber numberWithInt:matIndex];
+    
+    NSDictionary *returnDict = @{ @"cols" : wid, @"rows" : hei, @"matIndex" : matI };
+    resolve(returnDict);
+    return outPutMat;
+}
+
+
 @end
 

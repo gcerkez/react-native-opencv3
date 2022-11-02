@@ -311,6 +311,7 @@ std::vector<std::string> Functions = {
     "randu",
     "randn",
     "rotate",
+    "pHash"
 };
 
 std::vector<std::string> types = {
@@ -612,6 +613,7 @@ std::vector<std::string> types = {
     "OutMat,Mat,Mat",
     "OutMat,Mat,Mat",
     "Mat,OutMat,int",
+    "Mat,OutMat",
 };
 
 typedef enum fns {
@@ -913,6 +915,7 @@ typedef enum fns {
     RANDU,
     RANDN,
     ROTATE,
+    PHASH,
 } ipfns;
 
 // these were functions used in conjunction with std::variant
@@ -3539,6 +3542,12 @@ Mat callOpencvMethod(int index, std::vector<ocvtypes>& args, Mat dMat) {
             auto p2 = args[1].m;
             auto p3 = args[2].i;
             rotate(p1, p2, p3);
+            return p2;
+        }
+        case PHASH: {
+            auto p1 = args[0].m;
+            auto p2 = args[1].m;
+            pHash(p1, p2, p3);
             return p2;
         }
 
