@@ -3547,7 +3547,7 @@ Mat callOpencvMethod(int index, std::vector<ocvtypes>& args, Mat dMat) {
         case PHASH: {
             auto p1 = args[0].m;
             auto p2 = args[1].m;
-            pHash(p1, p2, p3);
+            pHash(p1, p2);
             return p2;
         }
 
