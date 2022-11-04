@@ -1,19 +1,41 @@
 
 
 // @author Adam G. Freeman - adamgf@gmail.com
+
+// Create an Objective-C file and name it ‘ObjC_to_RN.m’
+// We import the @interface class from ObjC_to_RN.h
+// We create an @implement class which includes modules and methods we want to export to React Native
+// Write a simple function
+// Wrap function above and export it to react-native
+
 #import "FileUtils.h"
 #import "MatManager.h"
 #import "CvInvoke.h"
 #import "CvCamera.h"
 #import "RNOpencv3.h"
 
+
+// implement class created
 @implementation RNOpencv3
 
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
 }
+
+// export module
 RCT_EXPORT_MODULE()
+
+// simple function on obj c
+- (NSString *)hello{
+NSLog( @"Hello world !");
+return @"Hello world !";
+}
+
+// wrap above function into callback func and export it to react native  now go to app js
+RCT_EXPORT_METHOD(sayHello: (RCTResponseSenderBlock)callback{
+callback(@[[NSNull null], self.hello]);
+});
 
 - (NSArray<NSString *> *)supportedEvents
 {
