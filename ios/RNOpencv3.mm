@@ -33,7 +33,7 @@ return @"Hello world !";
 }
 
 - (NSString *)hello2{
-pHash("mat", "mat2")
+pHash("mat", "mat2");
 return @"phash !";
 }
 
