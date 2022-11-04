@@ -42,11 +42,11 @@ callback(@[[NSNull null], self.hello]);
     return @[@"onPayload"];
 }
 
-RCT_EXPORT_METHOD(runPhash:(NSString*)filePath resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) 
-{
-    NSLog(@"RCT EXPORT METHOD runPhash call");
-    [FileUtils getMatFromImage:filePath resolver:resolve rejecter:reject];
-}
+// RCT_EXPORT_METHOD(runPhash:(NSString*)filePath resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) 
+// {
+//     NSLog(@"RCT EXPORT METHOD runPhash call");
+//     [FileUtils getMatFromImage:filePath resolver:resolve rejecter:reject];
+// }
 
 RCT_EXPORT_METHOD(imageToMat:(NSString*)inPath resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     [FileUtils imageToMat:inPath resolver:resolve rejecter:reject];
