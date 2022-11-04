@@ -8,6 +8,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
 #import <UIKit/UIKit.h>
+#import "External.h"
 
 @interface RNOpencv3 : RCTEventEmitter <RCTBridgeModule>
 

@@ -32,15 +32,29 @@ NSLog( @"Hello world !");
 return @"Hello world !";
 }
 
+- (NSString *)hello2{
+pHash("mat", "mat2")
+return @"phash !";
+}
+
 // wrap above function into callback func and export it to react native  now go to app js
 RCT_EXPORT_METHOD(sayHello: (RCTResponseSenderBlock)callback{
 callback(@[[NSNull null], self.hello]);
 });
 
+
+// wrap above function into callback func and export it to react native  now go to app js
+RCT_EXPORT_METHOD(jsPhash: (RCTResponseSenderBlock)callback{
+callback(@[[NSNull null], self.hello2]);
+});
+
+
 - (NSArray<NSString *> *)supportedEvents
 {
     return @[@"onPayload"];
 }
+
+
 
 // RCT_EXPORT_METHOD(runPhash:(NSString*)filePath resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) 
 // {
