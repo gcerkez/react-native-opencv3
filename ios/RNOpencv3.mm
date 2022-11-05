@@ -33,7 +33,17 @@ return @"Hello world !";
 }
 
 - (NSString *)hello2{
-pHash("mat", "mat2");
+// int matIndex = [MatManager.sharedMgr createMat:rows cols:cols cvtype:cvtype scalarVal:scalarVal];
+Mat image_copy;
+Mat outMat;
+cv::img_hash::pHash(scrMat, outMat)
+
+// for (int col = 0; col < outMat.cols(); col++)
+// {
+//     String hex = Integer.toHexString((int) outMat.get(0, col)[0]);
+//     sb.append(hex);
+// }
+
 return @"phash !";
 }
 

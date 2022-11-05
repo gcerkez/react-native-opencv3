@@ -64,12 +64,20 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
     @ReactMethod
     public void runPhash(String filePath, final Promise promise) {
         Log.d("RNOpencv3Module", "Running ReactMethod: runPhash!");
+        Log.d("RNOpencv3Module", "img path: " + filePath);
         try {
-            Mat imageMat = FileUtils.getMatFromImage("/sdcard/DCIM/girl_wide_brim_hat.png", promise);
+            Mat imageMat = FileUtils.getMatFromImage(filePath, promise);
             Mat out = new Mat();
             Img_hash.pHash(imageMat, out);
-            System.out.println(out);
+
+            StringBuilder sb = new StringBuilder();
+            for (int col = 0; col < out.cols(); col++) {
+                String hex = Integer.toHexString((int) out.get(0, col)[0]);
+                sb.append(hex);
+            }
+            promise.resolve(sb.toString());
         } catch (Exception ex) {
+            System.out.println(ex);
             System.out.println("Exception in runPhash!");
             promise.reject("ENOENT", "ENOENT: no such file or directory, please check '" + filePath + "'");
         }
