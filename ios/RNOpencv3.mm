@@ -32,8 +32,8 @@ NSLog( @"Hello world !");
 return @"Hello world !";
 }
 
-- (NSString *)hello2{
-// int matIndex = [MatManager.sharedMgr createMat:rows cols:cols cvtype:cvtype scalarVal:scalarVal];
+- (NSString *)hello2:(NSString*)filePath{
+NSLog(@"Value of filepath in hello2 = %@", filePath);
 Mat srcMat;
 Mat outMat;
 cv::img_hash::pHash(srcMat, outMat);
@@ -54,9 +54,9 @@ callback(@[[NSNull null], self.hello]);
 
 
 // wrap above function into callback func and export it to react native  now go to app js
-RCT_EXPORT_METHOD(jsPhash: (NSString*)filePath callback:(RCTResponseSenderBlock)callback {
-NSLog(@"Value of filepath = %@", filePath);
-callback(@[[NSNull null], self.hello2]);
+RCT_EXPORT_METHOD(jsPhash:(NSString*)filePath callback:(RCTResponseSenderBlock)callback {
+NSLog(@"Value of filepath in jsPhash = %@", filePath);
+callback(@[[NSNull null], self.hello2:filePath]);
 });
 
 
