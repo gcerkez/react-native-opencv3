@@ -1,12 +1,4 @@
-
-
 // @author Adam G. Freeman - adamgf@gmail.com
-
-// Create an Objective-C file and name it ‘ObjC_to_RN.m’
-// We import the @interface class from ObjC_to_RN.h
-// We create an @implement class which includes modules and methods we want to export to React Native
-// Write a simple function
-// Wrap function above and export it to react-native
 
 #import "FileUtils.h"
 #import "MatManager.h"
@@ -14,8 +6,6 @@
 #import "CvCamera.h"
 #import "RNOpencv3.h"
 
-
-// implement class created
 @implementation RNOpencv3
 
 - (dispatch_queue_t)methodQueue
@@ -23,43 +13,31 @@
     return dispatch_get_main_queue();
 }
 
-// export module
 RCT_EXPORT_MODULE()
 
-// simple function on obj c
-- (NSString *)hello{
-NSLog( @"Hello world !");
-return @"Hello world !";
-}
-
-- (NSString *)hello2:(NSString*)filePath{
+- (NSString *)getHash:(NSString*)filePath{
 NSLog(@"Value of filepath in hello2 = %@", filePath);
 UIImage *sourceImage = [UIImage imageWithContentsOfFile:filePath];
 Mat srcMat;
 UIImageToMat(sourceImage, srcMat);
 Mat outMat;
 cv::img_hash::pHash(srcMat, outMat);
-std::string hash;
 std::ostringstream s;
     
 for (int i = 0; i<outMat.cols; i++)
     s << std::hex<<int(outMat.at<uchar>(0, i));
 std::cout << "\n";
 std::cout << "\n" << s.str() << "\n";
+    
+NSString *hash = [NSString stringWithCString:s.str().c_str() encoding:[NSString defaultCStringEncoding]];
 
-return s.str()
+return hash;
 }
-
-// wrap above function into callback func and export it to react native  now go to app js
-RCT_EXPORT_METHOD(sayHello: (RCTResponseSenderBlock)callback{
-callback(@[[NSNull null], self.hello]);
-});
-
 
 // wrap above function into callback func and export it to react native  now go to app js
 RCT_EXPORT_METHOD(jsPhash:(NSString*)filePath callback:(RCTResponseSenderBlock)callback {
 NSLog(@"Value of filepath in jsPhash = %@", filePath);
-callback(@[[NSNull null], [self hello2:filePath]]);
+callback(@[[NSNull null], [self getHash:filePath]]);
 });
 
 
