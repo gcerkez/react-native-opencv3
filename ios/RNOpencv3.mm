@@ -36,7 +36,7 @@ return @"Hello world !";
 // int matIndex = [MatManager.sharedMgr createMat:rows cols:cols cvtype:cvtype scalarVal:scalarVal];
 Mat srcMat;
 Mat outMat;
-cv::img_hash::pHash(srcMat, outMat)
+cv::img_hash::pHash(srcMat, outMat);
 
 // for (int col = 0; col < outMat.cols(); col++)
 // {
