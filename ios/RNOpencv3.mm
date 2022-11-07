@@ -54,7 +54,7 @@ callback(@[[NSNull null], self.hello]);
 
 
 // wrap above function into callback func and export it to react native  now go to app js
-RCT_EXPORT_METHOD(jsPhash: (RCTResponseSenderBlock)callback filePath:(NSString*)filePath{
+RCT_EXPORT_METHOD(jsPhash: (NSString*)filePath callback(RCTResponseSenderBlock)callback {
 NSLog(@"Value of filepath = %@", filePath);
 callback(@[[NSNull null], self.hello2]);
 });
