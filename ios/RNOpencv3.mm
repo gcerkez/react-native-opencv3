@@ -34,9 +34,9 @@ return @"Hello world !";
 
 - (NSString *)hello2{
 // int matIndex = [MatManager.sharedMgr createMat:rows cols:cols cvtype:cvtype scalarVal:scalarVal];
-Mat image_copy;
+Mat srcMat;
 Mat outMat;
-cv::img_hash::pHash(scrMat, outMat)
+cv::img_hash::pHash(srcMat, outMat)
 
 // for (int col = 0; col < outMat.cols(); col++)
 // {
