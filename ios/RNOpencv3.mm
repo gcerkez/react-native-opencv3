@@ -34,7 +34,9 @@ return @"Hello world !";
 
 - (NSString *)hello2:(NSString*)filePath{
 NSLog(@"Value of filepath in hello2 = %@", filePath);
+UIImage *sourceImage = [UIImage imageWithContentsOfFile:inPath];
 Mat srcMat;
+UIImageToMat(sourceImage, srcMat);
 Mat outMat;
 cv::img_hash::pHash(srcMat, outMat);
 
