@@ -34,19 +34,20 @@ return @"Hello world !";
 
 - (NSString *)hello2:(NSString*)filePath{
 NSLog(@"Value of filepath in hello2 = %@", filePath);
-UIImage *sourceImage = [UIImage imageWithContentsOfFile:inPath];
+UIImage *sourceImage = [UIImage imageWithContentsOfFile:filePath];
 Mat srcMat;
 UIImageToMat(sourceImage, srcMat);
 Mat outMat;
 cv::img_hash::pHash(srcMat, outMat);
+std::string hash;
+std::ostringstream s;
+    
+for (int i = 0; i<outMat.cols; i++)
+    s << std::hex<<int(outMat.at<uchar>(0, i));
+std::cout << "\n";
+std::cout << "\n" << s.str() << "\n";
 
-// for (int col = 0; col < outMat.cols(); col++)
-// {
-//     String hex = Integer.toHexString((int) outMat.get(0, col)[0]);
-//     sb.append(hex);
-// }
-
-return @"phash !";
+return s.str()
 }
 
 // wrap above function into callback func and export it to react native  now go to app js
