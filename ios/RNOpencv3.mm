@@ -1,9 +1,5 @@
 // @author Adam G. Freeman - adamgf@gmail.com
 
-#import "FileUtils.h"
-#import "MatManager.h"
-#import "CvInvoke.h"
-#import "CvCamera.h"
 #import "RNOpencv3.h"
 
 @implementation RNOpencv3

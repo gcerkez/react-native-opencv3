@@ -9,8 +9,6 @@
 #import <React/RCTUIManager.h>
 #import <UIKit/UIKit.h>
 #import "External.h"
-#include <opencv2/img_hash/phash.hpp>
-#include <opencv2/img_hash.hpp>
 
 @interface RNOpencv3 : RCTEventEmitter <RCTBridgeModule>
 
