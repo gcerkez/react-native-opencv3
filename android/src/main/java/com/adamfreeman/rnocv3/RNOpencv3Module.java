@@ -88,7 +88,6 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             }
             Mat img = new Mat(bitmap.getHeight(), bitmap.getWidth(), CvType.CV_8UC4);
             Utils.bitmapToMat(bitmap, img);
-            // int matIndex = MatManager.getInstance().addMat(img);
 
             System.out.println("returning mat: " + inPath);
             return img;
@@ -105,7 +104,7 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
         Log.d("RNOpencv3Module", "Running ReactMethod: runPhash! slim");
         Log.d("RNOpencv3Module", "img path: " + filePath);
         try {
-            Mat imageMat = FileUtils.getMatFromImage(filePath, promise);
+            Mat imageMat = getMatFromImage(filePath, promise);
             Mat out = new Mat();
             Img_hash.pHash(imageMat, out);
 
