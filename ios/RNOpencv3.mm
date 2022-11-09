@@ -26,10 +26,15 @@ RCT_EXPORT_MODULE()
     return hash;
 }
 
-RCT_EXPORT_METHOD(jsPhash:(NSString*)filePath callback:(RCTResponseSenderBlock)callback {
+RCT_EXPORT_METHOD(jsPhash:(NSString*)filePath resolver:(RCTPromiseResolveBlock)resolve
+     rejecter:(RCTPromiseRejectBlock)reject) {
     NSLog(@"Value of filepath in jsPhash = %@", filePath);
-    callback(@[[NSNull null], [self getHash:filePath]]);
-});
+    NSString *hash = [self getHash:filePath];
+    NSLog(@"Value of hash = %@", hash);
+    if (hash) {
+        resolve(hash);
+    } 
+};
 
 
 - (NSArray<NSString *> *)supportedEvents
